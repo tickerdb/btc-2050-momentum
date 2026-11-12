@@ -1,0 +1,6 @@
+# Fetched from TickerDB with your key; rebuild with `python backtest.py`.
+data/
+# Your live position.
+state.json
+run.log
+__pycache__/
