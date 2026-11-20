@@ -259,6 +259,8 @@ python -m unittest discover -s tests   # offline tests of the record
 
 The replay needs a TickerDB plan with daily history back to 2019 (Pro). No dependencies beyond Python 3.10+.
 
+The first `python run.py` starts from what the model holds now: it reads the model's newest book (`/v1/models/btc-2050-momentum/holdings`, on every plan, 1 credit), prints each position's side, entry date and price, and keeps it in `state.json`. Later runs carry it on from there.
+
 Point in time: each decision uses only data up to that day's close, and the order fills at the next daily open. The 20- and 50-day SMAs are TickerDB's `trend_ma20_price` and `trend_ma50_price`. A position takes the whole balance at the open it fills; a short is 1x and not rebalanced while it is open.
 
 ## Caveats

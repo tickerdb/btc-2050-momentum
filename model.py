@@ -42,7 +42,9 @@ def api_key() -> str:
 
 def get(path: str, params: dict | None = None) -> dict:
     url = f"{API}{path}" + ("?" + urllib.parse.urlencode(params) if params else "")
-    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {api_key()}", "Accept": "application/json"})
+    # A named User-Agent: Python's default one is refused (403) in front of the API.
+    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {api_key()}", "Accept": "application/json",
+                                               "User-Agent": "tickerdb-btc-2050-momentum/1.0 (+https://github.com/tickerdb/btc-2050-momentum)"})
     with urllib.request.urlopen(req, timeout=60) as resp:
         return json.load(resp)
 
